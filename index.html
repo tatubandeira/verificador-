@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Ternas Pitagóricas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: #00ff2a;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        input {
+            width: calc(33% - 10px);
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ac7272;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: rgb(117, 103, 103);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #resultado {
+            margin-top: 15px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+        .historico {
+            margin-top: 20px;
+            border-top: 1px solid #fd0000;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Verificador de Ternas Pitagóricas</h1>
+        <input type="number" id="a" placeholder="Valor de a" required>
+        <input type="number" id="b" placeholder="Valor de b" required>
+        <input type="number" id="c" placeholder="Valor de c" required>
+        <button onclick="verificar()">Verificar</button>
+        <p id="resultado"></p>
+        
+        <div class="historico" id="historico">
+            <h2>Histórico</h2>
+            <ul id="lista-historico"></ul>
+        </div>
+    </div>
+
+    <script>
+        function verificar() {
+            const a = parseInt(document.getElementById('a').value);
+            const b = parseInt(document.getElementById('b').value);
+            const c = parseInt(document.getElementById('c').value);
+            const resultado = document.getElementById('resultado');
+            const listaHistorico = document.getElementById('lista-historico');
+
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                resultado.innerText = "Por favor, insira valores válidos.";
+                return;
+            }
+
+            if (a * a + b * b === c * c) {
+                resultado.innerText = "É uma terna pitagórica!";
+                adicionarHistorico(a, b, c, true);
+            } else {
+                resultado.innerText = "Não é uma terna pitagórica.";
+                adicionarHistorico(a, b, c, false);
+            }
+        }
+
+        function adicionarHistorico(a, b, c, isPitagorica) {
+            const listaHistorico = document.getElementById('lista-historico');
+            const li = document.createElement('li');
+            li.textContent = `(${a}, ${b}, ${c}) - ${isPitagorica ? 'Pitagórica' : 'Não Pitagórica'}`;
+            listaHistorico.appendChild(li);
+        }
+    </script>
+</body>
+</html>
